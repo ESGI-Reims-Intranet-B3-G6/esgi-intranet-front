@@ -1,0 +1,37 @@
+import { fetchBaseQuery } from '@reduxjs/toolkit/query';
+import type { BaseQueryApi } from '@reduxjs/toolkit/query';
+import { env, storage, Variables } from '../utils';
+
+type Error = { message?: string; status?: number; details?: { cause?: string } };
+
+const rawBaseQuery = () =>
+	fetchBaseQuery({
+		baseUrl: env(Variables.backendUrl),
+		credentials: 'include',
+		responseHandler: async response => {
+			return response.text();
+		},
+	});
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const baseQuery = async (args: any, api: BaseQueryApi, extraOptions: Record<string, any>) => {
+	const result = await rawBaseQuery()(args, api, extraOptions);
+
+	const error: Error | null = result.error?.data ? JSON.parse(result.error.data as string) : null;
+	if (error && (error.details?.cause === 'No auth token' || error.details?.cause === 'jwt expired')) {
+		if (storage.getItem('loggedIn') !== '1') {
+			return result;
+		}
+
+		console.log('Refreshing token...');
+		const refreshReponse = await fetch(env(Variables.backendUrl) + '/auth/refresh', { credentials: 'include' });
+		if (!refreshReponse.ok) {
+			console.error('Error when refreshing token: ', error);
+			console.log('Logging out user...');
+			storage.setItem('loggedIn', '0');
+		}
+		window.location.reload();
+	}
+
+	return result;
+};
