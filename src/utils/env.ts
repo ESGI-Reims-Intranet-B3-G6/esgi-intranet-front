@@ -2,6 +2,7 @@ const Variables = {
 	appEnv: 'APP_ENV',
 	frontPort: 'FRONT_PORT',
 	backendUrl: 'BACKEND_URL',
+	debugProtectedRoute: 'DEBUG_PROTECTED_ROUTE',
 } as const;
 
 type Variable = (typeof Variables)[keyof typeof Variables];

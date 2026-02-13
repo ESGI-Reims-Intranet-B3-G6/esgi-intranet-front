@@ -1,12 +1,13 @@
 import reactLogo from '../assets/react.svg';
 import viteLogo from '/vite.svg';
-import '../App.css';
+import './Home.css';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import { decrement, increment } from '../store/auth/slice.ts';
 import { env, storage, Variables } from '../utils';
 import { useGetUserInfoQuery, useLazyGetHelloByNameQuery, useLazyLogoutQuery } from '../services/auth/api.ts';
 import { useEffect, useState } from 'react';
+import {Routes} from "../router";
 
 function Home() {
 	const count = useSelector((state: RootState) => state.auth.value);
@@ -22,7 +23,7 @@ function Home() {
 	const isLoggedIn = storage.getItem('loggedIn') === '1';
 
 	if (isLogoutSuccess) {
-		window.location.reload();
+		window.location.replace(Routes.Login);
 	}
 
 	async function handleGetHello() {

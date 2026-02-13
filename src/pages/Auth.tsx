@@ -1,8 +1,8 @@
-import '../App.css';
 import { Navigate, useSearchParams } from 'react-router';
 import { Routes } from '../router';
 import { useLazyLoginCallbackQuery } from '../services/auth/api.ts';
 import { useEffect } from 'react';
+import { Stack, Typography } from '@mui/material';
 
 function Auth() {
 	const [searchParams, _setSearchParams] = useSearchParams();
@@ -23,11 +23,22 @@ function Auth() {
 		return <Navigate to={{ pathname: Routes.Home }} />;
 	}
 
+  if (isSuccess) {
+    window.location.replace(Routes.Home);
+  }
+
 	return (
 		<>
-			{isLoading && <p>Logging in...</p>}
-			{isError && <p>Error</p>}
-			{isSuccess && <Navigate to={Routes.Home} />}
+			<Stack style={{ backgroundImage: 'url("assets/login-bg.jpg")', height: '100vh' }}>
+				<Typography className={'text-outline-black-3'} style={{ margin: '2rem auto' }} variant={'h2'}>
+					ESGI Intranet
+				</Typography>
+				<Typography className={'text-outline-black-3'} style={{ margin: '1rem auto' }} variant={'h3'}>
+					{isLoading && <p>Connexion en cours...</p>}
+					{isError && <p>Erreur lors de la connexion à l'intranet.</p>}
+          {isSuccess && <p>Connexion réussie ! Redirection vers l'intranet...</p>}
+				</Typography>
+			</Stack>
 		</>
 	);
 }

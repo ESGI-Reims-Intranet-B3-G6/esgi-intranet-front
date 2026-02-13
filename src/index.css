@@ -23,11 +23,9 @@ a:hover {
 }
 
 body {
-	margin: 0;
-	display: flex;
-	place-items: center;
 	min-width: 320px;
 	min-height: 100vh;
+    margin: 0;
 }
 
 h1 {
@@ -52,6 +50,18 @@ button:hover {
 button:focus,
 button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
+}
+
+.text-outline-black-3 {
+    text-shadow: #000 0 0 3px, #000 0 0 3px, #000 0 0 3px, #000 0 0 3px, #000 0 0 3px, #000 0 0 3px;
+}
+
+.text-outline-black-2 {
+    text-shadow: #000 0 0 2px, #000 0 0 2px, #000 0 0 2px, #000 0 0 2px, #000 0 0 2px, #000 0 0 2px;
+}
+
+.text-outline-black-1 {
+    text-shadow: #000 0 0 1px, #000 0 0 1px, #000 0 0 1px, #000 0 0 1px, #000 0 0 1px, #000 0 0 1px;
 }
 
 @media (prefers-color-scheme: light) {
