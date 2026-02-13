@@ -15,7 +15,7 @@ const rawBaseQuery = () =>
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const baseQuery = async (args: any, api: BaseQueryApi, extraOptions: Record<string, any>) => {
-	const result = await rawBaseQuery()(args, api, extraOptions);
+	let result = await rawBaseQuery()(args, api, extraOptions);
 
 	const error: Error | null = result.error?.data ? JSON.parse(result.error.data as string) : null;
 	if (error && (error.details?.cause === 'No auth token' || error.details?.cause === 'jwt expired')) {
@@ -25,12 +25,15 @@ export const baseQuery = async (args: any, api: BaseQueryApi, extraOptions: Reco
 
 		console.log('Refreshing token...');
 		const refreshReponse = await fetch(env(Variables.backendUrl) + '/auth/refresh', { credentials: 'include' });
-		if (!refreshReponse.ok) {
+		if (refreshReponse.ok) {
+			// Retrying the original request...
+			result = await rawBaseQuery()(args, api, extraOptions);
+		} else {
 			console.error('Error when refreshing token: ', error);
 			console.log('Logging out user...');
 			storage.setItem('loggedIn', '0');
+			window.location.reload();
 		}
-		window.location.reload();
 	}
 
 	return result;
