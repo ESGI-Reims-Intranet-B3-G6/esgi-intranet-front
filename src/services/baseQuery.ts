@@ -6,7 +6,7 @@ type Error = { message?: string; status?: number; details?: { cause?: string } }
 
 const rawBaseQuery = () =>
 	fetchBaseQuery({
-		baseUrl: env(Variables.backendUrl),
+		baseUrl: `${env(Variables.backendUrl)}/`,
 		credentials: 'include',
 		responseHandler: async response => {
 			return response.text();

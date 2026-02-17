@@ -1,24 +1,19 @@
 import reactLogo from '../assets/react.svg';
 import viteLogo from '/vite.svg';
 import './Home.css';
-import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../store';
-import { decrement, increment } from '../store/auth/slice.ts';
 import { env, storage, Variables } from '../utils';
-import { useGetUserInfoQuery, useLazyGetHelloByNameQuery, useLazyLogoutQuery } from '../services/auth/api.ts';
+import { useGetUserInfoQuery, useLazyLogoutQuery, useLazyPingQuery } from '../services';
 import { useEffect, useState } from 'react';
-import {Routes} from "../router";
+import { Routes } from "../router";
 
 function Home() {
-	const count = useSelector((state: RootState) => state.auth.value);
-	const dispatch = useDispatch();
+  const [count, setCount] = useState(0);
 	const [showError, setShowError] = useState(false);
-	const [getHelloByName, { isFetching, isError }] = useLazyGetHelloByNameQuery();
+	const [ping, { data, isFetching, isError }] = useLazyPingQuery();
 	const [logout, { isLoading: isLogoutLoading, isError: isLogoutError, isSuccess: isLogoutSuccess }] =
 		useLazyLogoutQuery();
-	const [data, setData] = useState<string | undefined>(undefined);
-	const { isLoading: isUserInfoLoading, isError: isUserInfoError } = useGetUserInfoQuery();
-	const userInfo = useSelector((state: RootState) => state.auth.userInfo);
+
+	const { data: userInfo, isLoading: isUserInfoLoading, isError: isUserInfoError } = useGetUserInfoQuery();
 
 	const isLoggedIn = storage.getItem('loggedIn') === '1';
 
@@ -27,8 +22,7 @@ function Home() {
 	}
 
 	async function handleGetHello() {
-		const result = await getHelloByName('test');
-		setData(result.data);
+		await ping('user', true);
 	}
 
 	async function handleSignIn() {
@@ -60,10 +54,10 @@ function Home() {
 			</div>
 			<h1>ESGI Intranet Backend + Frontend + Auth Tester</h1>
 			<div className="card">
-				<button style={{ marginRight: '1rem' }} onClick={() => dispatch(increment())}>
+				<button style={{ marginRight: '1rem' }} onClick={() => setCount(count + 1)}>
 					Increment count: {count}
 				</button>
-				<button style={{ marginRight: '1rem' }} onClick={() => dispatch(decrement())}>
+				<button style={{ marginRight: '1rem' }} onClick={() => setCount(count - 1)}>
 					Decrement count: {count}
 				</button>
 				<button style={{ marginRight: '1rem' }} onClick={handleGetHello}>

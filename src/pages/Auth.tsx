@@ -1,6 +1,6 @@
 import { Navigate, useSearchParams } from 'react-router';
 import { Routes } from '../router';
-import { useLazyLoginCallbackQuery } from '../services/auth/api.ts';
+import { useLazyLoginCallbackQuery } from '../services';
 import { useEffect } from 'react';
 import { Stack, Typography } from '@mui/material';
 
