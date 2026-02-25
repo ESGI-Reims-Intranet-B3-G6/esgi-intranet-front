@@ -1,0 +1,13 @@
+#FullscreenLoader {
+    transition: opacity 0.5s;
+    animation: fadeIn 0.2s linear;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity:0
+    }
+    100% {
+        opacity:1;
+    }
+}

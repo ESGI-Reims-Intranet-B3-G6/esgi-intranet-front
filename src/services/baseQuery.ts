@@ -36,5 +36,14 @@ export const baseQuery = async (args: any, api: BaseQueryApi, extraOptions: Reco
 		}
 	}
 
+	if (error && error.message === 'User is disabled') {
+		console.error('Error while performing request: ', error);
+		console.log('Logging out user...');
+		if (storage.getItem('loggedIn') !== '0') {
+			storage.setItem('loggedIn', '0');
+			window.location.reload();
+		}
+	}
+
 	return result;
 };

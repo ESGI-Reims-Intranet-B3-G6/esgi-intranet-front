@@ -2,16 +2,17 @@ import reactLogo from '../assets/react.svg';
 import viteLogo from '/vite.svg';
 import './Home.css';
 import { env, storage, Variables } from '../utils';
-import { useGetUserInfoQuery, useLazyLogoutQuery, useLazyPingQuery } from '../services';
+import { useGetUserInfoQuery, useLogoutMutation, useLazyPingQuery } from '../services';
 import { useEffect, useState } from 'react';
 import { Routes } from "../router";
+import { FullscreenLoader } from "../components/FullscreenLoader.tsx";
 
 function Home() {
   const [count, setCount] = useState(0);
 	const [showError, setShowError] = useState(false);
 	const [ping, { data, isFetching, isError }] = useLazyPingQuery();
 	const [logout, { isLoading: isLogoutLoading, isError: isLogoutError, isSuccess: isLogoutSuccess }] =
-		useLazyLogoutQuery();
+    useLogoutMutation();
 
 	const { data: userInfo, isLoading: isUserInfoLoading, isError: isUserInfoError } = useGetUserInfoQuery();
 
@@ -44,6 +45,7 @@ function Home() {
 
 	return (
 		<>
+      <FullscreenLoader loading={isUserInfoLoading} />
 			<div>
 				<a href="https://vite.dev" target="_blank">
 					<img src={viteLogo} className="logo" alt="Vite logo" />

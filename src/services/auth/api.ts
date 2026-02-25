@@ -5,7 +5,7 @@ import type { LoginCallbackRequest } from './types';
 
 export const authApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
-		loginCallback: builder.query<void, LoginCallbackRequest>({
+		loginCallback: builder.mutation<void, LoginCallbackRequest>({
 			query: ({ code, sessionState }) => {
 				return {
 					url: 'auth/microsoft',
@@ -19,7 +19,7 @@ export const authApi = baseApi.injectEndpoints({
 				});
 			},
 		}),
-		logout: builder.query<void, void>({
+		logout: builder.mutation<void, void>({
 			query: () => 'auth/logout',
 			onQueryStarted(_arg, { queryFulfilled }): Promise<void> | void {
 				// When the query completes successfully, persist the fact that the user is logged out
@@ -34,4 +34,4 @@ export const authApi = baseApi.injectEndpoints({
 	}),
 });
 
-export const { useLazyLoginCallbackQuery, useLazyLogoutQuery, useGetUserInfoQuery } = authApi;
+export const { useLoginCallbackMutation, useLogoutMutation, useGetUserInfoQuery } = authApi;
