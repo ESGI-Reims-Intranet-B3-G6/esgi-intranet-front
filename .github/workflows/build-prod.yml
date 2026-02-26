@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: 22
 
+      - name: Set up environment variables
+        run: echo "${{ vars.FRONTEND_PROD_ENV }}" > .env
+
       - name: Install dependencies
         run: npm install
 
