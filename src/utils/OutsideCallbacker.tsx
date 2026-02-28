@@ -30,7 +30,7 @@ function useOutsideCallbacker(
 /**
  * Component that runs a callback if you click outside of it
  */
-function OutsideCallbacker({
+export function OutsideCallbacker({
   callback,
   children,
 	event = 'click',
@@ -46,5 +46,3 @@ function OutsideCallbacker({
 
 	return <div ref={wrapperRef}>{children}</div>;
 }
-
-export default OutsideCallbacker;

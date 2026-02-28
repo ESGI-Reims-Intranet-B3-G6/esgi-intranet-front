@@ -7,7 +7,7 @@ import { Routes } from "../router";
 import { useGetUserInfoQuery, useLogoutMutation, type UserInfo } from '../services';
 import { AccountCircle } from "@mui/icons-material";
 import { useState } from "react";
-import { OutsideCallbacker } from '../utils';
+import { OutsideCallbacker } from '../utils/OutsideCallbacker';
 
 function NavbarLink(props: { url: string, label: string }) {
   return <NavLink to={props.url} style={{color: 'white', fontSize: '18px'}}>{props.label}</NavLink>
