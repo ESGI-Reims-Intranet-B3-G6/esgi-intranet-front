@@ -1,7 +1,7 @@
 import baseApi from '../baseApi';
 import type { FetchArgs } from '@reduxjs/toolkit/query';
 import { storage } from '../../utils';
-import type { LoginCallbackRequest } from './types';
+import type { LoginCallbackRequest, UserInfo } from './types';
 
 export const authApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
@@ -22,14 +22,14 @@ export const authApi = baseApi.injectEndpoints({
 		logout: builder.mutation<void, void>({
 			query: () => 'auth/logout',
 			onQueryStarted(_arg, { queryFulfilled }): Promise<void> | void {
-				// When the query completes successfully, persist the fact that the user is logged out
-				queryFulfilled.then(_result => {
+				// Whether the query completes successfully or not, persist the fact that the user is logged out
+				queryFulfilled.finally(() => {
 					storage.setItem('loggedIn', '0');
 				});
 			},
 		}),
-		getUserInfo: builder.query<object, void>({
-			query: () => 'auth/test',
+		getUserInfo: builder.query<UserInfo, void>({
+			query: () => 'auth',
 		}),
 	}),
 });

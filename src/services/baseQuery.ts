@@ -8,16 +8,14 @@ const rawBaseQuery = () =>
 	fetchBaseQuery({
 		baseUrl: `${env(Variables.backendUrl)}/`,
 		credentials: 'include',
-		responseHandler: async response => {
-			return response.text();
-		},
+		responseHandler: 'json',
 	});
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const baseQuery = async (args: any, api: BaseQueryApi, extraOptions: Record<string, any>) => {
 	let result = await rawBaseQuery()(args, api, extraOptions);
 
-	const error: Error | null = result.error?.data ? JSON.parse(result.error.data as string) : null;
+	const error: Error | null = result.error?.data ?? null;
 	if (error && (error.details?.cause === 'No auth token' || error.details?.cause === 'jwt expired')) {
 		if (storage.getItem('loggedIn') !== '1') {
 			return result;

@@ -8,6 +8,7 @@ export const pingApi = baseApi.injectEndpoints({
 				return {
 					url: '',
 					params: { name },
+					responseHandler: 'text',
 				} as FetchArgs;
 			},
 		}),
