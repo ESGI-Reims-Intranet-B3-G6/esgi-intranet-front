@@ -31,3 +31,4 @@ $ cp .env.example .env
 
 `npx husky init`  
 If using GitHub Desktop on Windows, and it doesn't work, check your PATH environment variable and make sure C:\Program Files\Git\bin is added before %SystemRoot%\system32 and C:\Program Files\Git\cmd
+
