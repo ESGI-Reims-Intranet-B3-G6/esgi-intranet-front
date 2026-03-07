@@ -28,6 +28,9 @@ export default defineConfig(({ mode }) => {
 		server: {
 			port: env.FRONT_PORT ? Number(env[Variables.frontPort]) : 5173,
 		},
+		preview: {
+			port: env.FRONT_PORT ? Number(env[Variables.frontPort]) : 4173,
+		},
 		plugins: [
 			react(),
 			svgr(),

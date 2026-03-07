@@ -1,7 +1,7 @@
 import baseApi from '../baseApi';
 import type { FetchArgs } from '@reduxjs/toolkit/query';
 import { storage } from '../../utils';
-import type { LoginCallbackRequest, UserInfo } from './types';
+import type { LoginCallbackRequest } from './types';
 
 export const authApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
@@ -28,10 +28,7 @@ export const authApi = baseApi.injectEndpoints({
 				});
 			},
 		}),
-		getUserInfo: builder.query<UserInfo, void>({
-			query: () => 'auth',
-		}),
 	}),
 });
 
-export const { useLoginCallbackMutation, useLogoutMutation, useGetUserInfoQuery } = authApi;
+export const { useLoginCallbackMutation, useLogoutMutation } = authApi;
