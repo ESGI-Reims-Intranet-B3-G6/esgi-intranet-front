@@ -64,6 +64,9 @@ function AccountMenu(props: { closing: boolean, opened: boolean, userInfo?: User
 				<Typography mb={1} textAlign={'center'} color={'lightgray'}>
 					{capitalize(props.userInfo.userRole.toLowerCase())}
 				</Typography>
+        <Typography mb={1} textAlign={'center'} color={'lightgray'}>
+          {capitalize((props.userInfo.group ?? 'Aucun groupe').toLowerCase())}
+        </Typography>
 				{isLoading || isSuccess || isError ? (
 					<Typography textAlign={'center'}>Déconnexion...</Typography>
 				) : (

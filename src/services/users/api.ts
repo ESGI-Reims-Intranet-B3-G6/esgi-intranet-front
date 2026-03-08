@@ -19,7 +19,32 @@ export const usersApi = baseApi.injectEndpoints({
 				} as FetchArgs;
 			},
 		}),
+		updateUsers: builder.mutation<void, { users: { email: string }[]; group: string; userRole: Role }>({
+			query: body => {
+				return {
+					url: 'users',
+					method: 'PUT',
+					body,
+				} as FetchArgs;
+			},
+		}),
+		disableUsers: builder.mutation<void, { users: { email: string }[] }>({
+			query: body => {
+				return {
+					url: 'users/disable',
+					method: 'PUT',
+					body,
+				} as FetchArgs;
+			},
+		}),
 	}),
 });
 
-export const { useGetUserInfoQuery, useGetUsersQuery, useCreateUserMutation } = usersApi;
+export const {
+	useGetUserInfoQuery,
+	useGetUsersQuery,
+	useCreateUserMutation,
+	useUpdateUsersMutation,
+	useDisableUsersMutation,
+	useEnableUsersMutation,
+} = usersApi;

@@ -6,6 +6,7 @@ export type UserInfo = {
 	email: string;
 	firstName: string;
 	lastName: string;
+	group?: string;
 	lastLogin: Date;
 	userRole: Role;
 };
