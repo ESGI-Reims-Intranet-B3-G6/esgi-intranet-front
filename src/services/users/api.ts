@@ -46,5 +46,4 @@ export const {
 	useCreateUserMutation,
 	useUpdateUsersMutation,
 	useDisableUsersMutation,
-	useEnableUsersMutation,
 } = usersApi;

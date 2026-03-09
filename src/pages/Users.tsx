@@ -318,7 +318,7 @@ const UsersListToolbarRemove = ({
 }) => {
   const [open, setOpen] = useState(false);
   const selection = useGridSelector(apiRef, gridRowSelectionStateSelector);
-  const [disableUsers, { isLoading, isError, error }] = useDisableUsersMutation();
+  const [disableUsers, { isLoading, isError }] = useDisableUsersMutation();
   const selectedRowIds = selection.type === 'include' ? Array.from(selection.ids) : [];
   const isMultipleSelected = selectedRowIds.length > 1;
 
