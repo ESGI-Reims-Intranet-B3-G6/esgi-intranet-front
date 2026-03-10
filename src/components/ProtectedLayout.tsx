@@ -126,7 +126,7 @@ function Header(props: { userInfo?: UserInfo; userInfoLoading: boolean }) {
           <SvgIcon component={ESGILogo} inheritViewBox style={{ height: '70px', width: 'auto', margin: '1rem 2rem' }} />
         </NavLink>
         <Container maxWidth={false} sx={{ alignItems: 'center', display: 'flex', gap: 5 }}>
-          {menus.map((menu) => <NavbarLink url={menu.route} label={menu.label} />)}
+          {menus.map((menu) => <NavbarLink url={menu.route as string} label={menu.label} />)}
           <Container sx={{ justifyContent: 'end', display: 'flex' }}>
             <AccountCircle
               id="account-circle"

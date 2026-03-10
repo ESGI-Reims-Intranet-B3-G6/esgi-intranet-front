@@ -411,7 +411,7 @@ const UsersListToolbar = (props: { users: UserInfo[] }) => {
 
 				<UsersListToolbarEdit apiRef={apiRef} users={props.users} />
 				<UsersListToolbarAdd apiRef={apiRef} />
-        <UsersListToolbarRemove apiRef={apiRef} users={props.users} />
+				<UsersListToolbarRemove apiRef={apiRef} users={props.users} />
 
 				<Tooltip title="Colonnes">
 					<ColumnsPanelTrigger render={<ToolbarButton />}>

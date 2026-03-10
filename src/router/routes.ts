@@ -4,6 +4,9 @@ export const Routes = {
 	Login: '/login',
 	Users: '/users',
 	News: '/news',
+	NewsArticle: (id: string) => `/news/article/${id}`,
+	CreateArticle: '/news/new',
+	EditArticle: (id: string) => `/news/edit/${id}`,
 	Hacklab: '/hacklab',
 };
 

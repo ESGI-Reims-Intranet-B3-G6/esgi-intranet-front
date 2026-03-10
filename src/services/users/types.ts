@@ -10,3 +10,11 @@ export type UserInfo = {
 	lastLogin: Date;
 	userRole: Role;
 };
+
+export type UserInfoRestricted = {
+	id: string;
+	email: string;
+	firstName: string;
+	lastName: string;
+	group?: string;
+};

@@ -10,6 +10,9 @@ export const routesConfig = createRoutesFromElements(
 				<Route path={Routes.Home} lazy={() => import('../pages/Home')} />
 				<Route path={Routes.Users} lazy={() => import('../pages/Users')} />
 				<Route path={Routes.News} lazy={() => import('../pages/News')} />
+				<Route path={Routes.CreateArticle} lazy={() => import('../pages/CreateArticle')} />
+				<Route path={Routes.EditArticle(':id')} lazy={() => import('../pages/EditArticle.tsx')} />
+				<Route path={Routes.NewsArticle(':id')} lazy={() => import('../pages/NewsArticle.tsx')} />
 				<Route path={Routes.Hacklab} lazy={() => import('../pages/Hacklab')} />
 			</Route>
 		</Route>
