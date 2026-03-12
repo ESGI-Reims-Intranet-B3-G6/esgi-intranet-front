@@ -1,7 +1,12 @@
 import { Box, Container, Paper, Typography } from '@mui/material';
+import { useLayoutEffect } from 'react';
 
 const Hacklab = () => {
-	return (
+  useLayoutEffect(() => {
+    document.title = 'Intranet ESGI | Hacklab';
+  }, []);
+
+  return (
 		<Container>
 			<Paper
 				elevation={0}

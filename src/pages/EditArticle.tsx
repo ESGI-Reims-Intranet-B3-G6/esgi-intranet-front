@@ -1,5 +1,5 @@
 import { Box, Typography, Container, TextField, Paper, Divider, Button, Alert, Fade } from '@mui/material';
-import { type FormEvent, useEffect, useState } from 'react';
+import { type FormEvent, useEffect, useLayoutEffect, useState } from 'react';
 import { MarkdownPreview } from '../components/MarkdownPreview.tsx';
 import { useEditArticleMutation, useGetArticleQuery } from '../services/news';
 import { useParams } from 'react-router';
@@ -46,7 +46,15 @@ const EditArticle = () => {
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
 	const [editArticle, _props] = useEditArticleMutation();
-	const [alert, setAlert] = useState<{ severity: 'success' | 'info' | 'warning' | 'error'; message: string | null, visible: boolean }>({severity: 'success', message: null, visible: false });
+	const [alert, setAlert] = useState<{
+		severity: 'success' | 'info' | 'warning' | 'error';
+		message: string | null;
+		visible: boolean;
+	}>({ severity: 'success', message: null, visible: false });
+
+	useLayoutEffect(() => {
+		document.title = "Intranet ESGI | Edition d'article";
+	}, []);
 
 	useEffect(() => {
 		if (!article) {

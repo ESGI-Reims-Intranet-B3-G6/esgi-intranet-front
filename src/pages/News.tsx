@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { MarkdownPreview } from '../components/MarkdownPreview.tsx';
 import { Routes } from '../router';
 import { useNavigate } from 'react-router';
+import { useLayoutEffect } from 'react';
 
 const ArticleShortPreview = ({ article }: { article: Article }) => {
 	return (
@@ -92,12 +93,16 @@ const ArticleShortPreviewList = (props: { articles: Article[] }) => {
 const News = () => {
 	const { data: articles, isLoading, isError } = useListArticlesQuery();
 
+	useLayoutEffect(() => {
+		document.title = 'Intranet ESGI | Actualités';
+	}, []);
+
 	return (
 		<Container>
 			<FullscreenLoader loading={isLoading} />
 			<Box mt={2}>
 				{isError && <Typography variant="h1">Erreur lors de la récupération des articles</Typography>}
-				{!isLoading && articles && <ArticleShortPreviewList articles={articles} /> }
+				{!isLoading && articles && <ArticleShortPreviewList articles={articles} />}
 			</Box>
 		</Container>
 	);

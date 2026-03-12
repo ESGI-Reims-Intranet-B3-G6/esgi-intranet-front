@@ -49,7 +49,7 @@ import {
 import { Navigate } from "react-router";
 import { Routes } from "../router";
 import { FullscreenLoader } from "../components/FullscreenLoader.tsx";
-import { useRef, useState, type FormEvent, type KeyboardEvent, type RefObject } from 'react';
+import { useRef, useState, type FormEvent, type KeyboardEvent, type RefObject, useLayoutEffect } from 'react';
 import { format } from "date-fns";
 import type { GridApiCommon } from "@mui/x-data-grid";
 
@@ -321,6 +321,10 @@ const UsersListToolbarRemove = ({
   const [disableUsers, { isLoading, isError }] = useDisableUsersMutation();
   const selectedRowIds = selection.type === 'include' ? Array.from(selection.ids) : [];
   const isMultipleSelected = selectedRowIds.length > 1;
+
+  useLayoutEffect(() => {
+    document.title = 'Intranet ESGI | Gestion des utilisateurs';
+  }, []);
 
   const handleDelete = async () => {
     const editedUsers = users.filter(user => selectedRowIds.includes(user.email));

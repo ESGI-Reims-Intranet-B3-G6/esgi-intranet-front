@@ -24,7 +24,7 @@ import { FullscreenLoader } from '../components/FullscreenLoader.tsx';
 import { MarkdownPreview } from '../components/MarkdownPreview.tsx';
 import { format } from 'date-fns';
 import { useGetUserInfoQuery, type UserInfo } from '../services';
-import { type FormEvent, useState } from 'react';
+import { type FormEvent, useLayoutEffect, useState } from 'react';
 import { getApiErrorString } from '../utils';
 import { Routes } from '../router';
 
@@ -258,12 +258,17 @@ const NewsArticle = () => {
 	const params = useParams();
 	const { data: article, isLoading, isError } = useGetArticleQuery(params.id ? Number(params.id) : 0);
 	const { data: user, isLoading: isUserInfoLoading, isError: isUserInfoError } = useGetUserInfoQuery();
+
+	useLayoutEffect(() => {
+		document.title = "Intranet ESGI | Lecture d'article";
+	}, []);
+
 	return (
 		<Container>
 			<FullscreenLoader loading={isLoading || isUserInfoLoading} />
 			{(isError || isUserInfoError) && <Typography>Could not load the requested article.</Typography>}
 			<Box m={2}>
-				{(!isLoading && !isUserInfoLoading) && article && user && <ArticleDetails article={article} user={user} />}
+				{!isLoading && !isUserInfoLoading && article && user && <ArticleDetails article={article} user={user} />}
 			</Box>
 		</Container>
 	);

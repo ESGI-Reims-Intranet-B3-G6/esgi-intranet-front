@@ -1,7 +1,7 @@
 import { Navigate, useSearchParams } from 'react-router';
 import { Routes } from '../router';
 import { useLoginCallbackMutation } from '../services';
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { Stack, Typography } from '@mui/material';
 
 function Auth() {
@@ -16,6 +16,10 @@ function Auth() {
 			parsedError = null;
 		}
 	}
+
+	useLayoutEffect(() => {
+		document.title = 'Intranet ESGI | Connexion';
+	}, []);
 
 	// When running in development mode, since we are using React's StrictMode,
 	// React will remount our components so that we can spot errors easily and thus,

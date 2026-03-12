@@ -1,5 +1,5 @@
 import { Box, Typography, Container, TextField, Paper, Divider, Button, Alert, Fade } from '@mui/material';
-import { type FormEvent, useState } from 'react';
+import { type FormEvent, useLayoutEffect, useState } from 'react';
 import { MarkdownPreview } from '../components/MarkdownPreview.tsx';
 import { useCreateArticleMutation } from '../services/news';
 
@@ -41,7 +41,15 @@ const CreateArticle = () => {
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
 	const [createArticle, _props] = useCreateArticleMutation();
-	const [alert, setAlert] = useState<{ severity: 'success' | 'info' | 'warning' | 'error'; message: string | null, visible: boolean }>({severity: 'success', message: null, visible: false });
+	const [alert, setAlert] = useState<{
+		severity: 'success' | 'info' | 'warning' | 'error';
+		message: string | null;
+		visible: boolean;
+	}>({ severity: 'success', message: null, visible: false });
+
+	useLayoutEffect(() => {
+		document.title = "Intranet ESGI | Création d'article";
+	}, []);
 
 	const onSubmit = async (event: FormEvent) => {
 		event.preventDefault();
