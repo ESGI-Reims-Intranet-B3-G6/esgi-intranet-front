@@ -17,7 +17,7 @@ function Login() {
 				ESGI Intranet
 			</Typography>
 			<Typography className={'text-outline-black-3'} style={{ margin: '1rem auto' }} variant={'h3'}>
-				Connectez-vous pour accéder à votre intranet
+				Connectez-vous pour accéder à votre intranet.
 			</Typography>
 			<Button
 				onClick={handleSignIn}
